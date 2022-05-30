@@ -3,14 +3,22 @@ import logo from '../../static/logo.png'
 import Product from '../../components/Product/Product'
 import {FiLogOut,FiMapPin,FiUser,FiCalendar,FiPhoneCall,FiShoppingCart} from "react-icons/fi"
 import { useAuth } from "../../context/AuthContext"
+import { Route,useNavigate   } from "react-router-dom";
 
 function Home() {
 
-
+    let navigate = useNavigate();
     const { currentUser, logout } = useAuth()
     console.log(currentUser);
 
-    const  
+    const handleLogout = async () => {
+        try{
+            await logout()
+            navigate("/register")
+        }catch(error){
+            console.log(error);
+        }
+    }
 
 
     return (
@@ -96,6 +104,7 @@ function Home() {
                 <div className="row-span-2 p-4 place-self-center">
                     <button
                         className="flex flex-row place-items-center gap-2 px-6 py-2 text-white font-title font-semibold text-xl bg-green-600 hover:bg-green-700 rounded-lg"
+                        onClick={handleLogout}
                     >
                         <FiShoppingCart></FiShoppingCart>Buy Now
                     </button>
