@@ -4,7 +4,7 @@ import {FiShoppingCart} from "react-icons/fi"
 
 function Product() {
     return (
-        <div className="flex gap-6 flex-row p-4 rounded-lg place-items-center bg-gray-bg/60">
+        <div className="flex gap-6 flex-row p-4 rounded-lg place-items-center bg-gray-bg/40">
             <img className="rounded-lg w-[70px]" alt="product" src={apple}></img>
             <div className="flex flex-col">
                 <p className="font-body text-3xl  font-semibold">Apple</p>
