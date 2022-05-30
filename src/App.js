@@ -5,11 +5,12 @@ import { AuthProvider } from "./context/AuthContext"
 import PrivateRoute from './routes/PrivateRoute'
 import { Routes, Route } from "react-router-dom";
 
+
 function App() {
   return (
     <div className="App">
       <Routes>
-        <PrivateRoute path="/" element={<Home/>}/>
+        <Route path="/" element={<Home/>}/>
         <Route exact path="/register" element={<Register/>}/>
       </Routes>
     </div>
