@@ -1,9 +1,12 @@
 import React,{useState} from 'react'
-import { Route,history,Navigate  } from "react-router-dom";
+import { Route,useNavigate   } from "react-router-dom";
 import Home from '../Home/Home'
 import { useAuth } from "../../context/AuthContext"
 
+
 function Register() {
+
+  let navigate = useNavigate();
 
   const { signup } = useAuth()
 
@@ -19,7 +22,7 @@ function Register() {
       setError("")
       setLoading(true)
       await signup(email.value, password.value)
-      return <Navigate to="/" replace={true}/>
+      return navigate("/")
     } catch (error) {
       setError(error);
     }
@@ -29,17 +32,17 @@ function Register() {
   
 
   return (
-    <>
-      <h1>Sign Up</h1>
+    <div>
+      <h1>Register</h1>
       <form onSubmit={handleSubmit}>
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input type="email" name="email" placeholder="Email" />
-        <label for="password">Password</label>
+        <label htmlFor="password">Password</label>
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">Submit</button>
       </form>
       <p>{error}</p>
-    </>
+    </div>
   )
 }
 
