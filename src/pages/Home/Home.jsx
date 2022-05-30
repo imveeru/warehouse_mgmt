@@ -2,8 +2,17 @@ import React from 'react'
 import logo from '../../static/logo.png'
 import Product from '../../components/Product/Product'
 import {FiLogOut,FiMapPin,FiUser,FiCalendar,FiPhoneCall,FiShoppingCart} from "react-icons/fi"
+import { useAuth } from "../../context/AuthContext"
 
 function Home() {
+
+
+    const { currentUser, logout } = useAuth()
+    console.log(currentUser);
+
+    const  
+
+
     return (
         <div className="h-100 p-5 grid grid-rows-1 grid-cols-12">
             {/* User Information section */}
