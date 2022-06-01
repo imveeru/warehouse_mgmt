@@ -4,11 +4,11 @@ import Home from '../Home/Home'
 import { useAuth } from "../../context/AuthContext"
 
 
-function Register() {
+function Login() {
 
   let navigate = useNavigate();
 
-  const { signup } = useAuth()
+  const { login } = useAuth()
 
   const[error,setError]=useState("")
   const[isLoading,setLoading]=useState(false)
@@ -21,8 +21,8 @@ function Register() {
     try {
       setError("")
       setLoading(true)
-      await signup(email.value, password.value)
-      return navigate("/login")
+      await login(email.value, password.value)
+      return navigate("/")
     } catch (error) {
       setError(error);
     }
@@ -33,7 +33,7 @@ function Register() {
 
   return (
     <div>
-      <h1>Register</h1>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input type="email" name="email" placeholder="Email" />
@@ -46,4 +46,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Login

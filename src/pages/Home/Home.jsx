@@ -14,7 +14,7 @@ function Home() {
     const handleLogout = async () => {
         try{
             await logout()
-            navigate("/register")
+            navigate("/login")
         }catch(error){
             console.log(error);
         }
@@ -71,6 +71,7 @@ function Home() {
                 <div className="row-span-2 p-4 place-self-center">
                     <button
                         className="flex flex-row place-items-center gap-2 px-6 py-2 hover:text-white text-blue-500 font-title font-semibold text-xl bg-blue-500/5 border-2 border-blue-500 hover:border-0 hover:bg-blue-600 rounded-lg"
+                        onClick={handleLogout}
                     >
                         <FiLogOut></FiLogOut>Log out
                     </button>
