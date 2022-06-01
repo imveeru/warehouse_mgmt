@@ -1,15 +1,35 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import logo from '../../static/logo.png'
 import Product from '../../components/Product/Product'
 import {FiLogOut,FiMapPin,FiUser,FiCalendar,FiPhoneCall,FiShoppingCart} from "react-icons/fi"
 import { useAuth } from "../../context/AuthContext"
-import { Route,useNavigate   } from "react-router-dom";
+import {db} from '../../firebase'
+import { useNavigate} from "react-router-dom";
 
 function Home() {
 
     let navigate = useNavigate();
     const { currentUser, logout } = useAuth()
-    console.log(currentUser);
+    console.log(currentUser.uid);
+
+    const[loggedInUser,setloggedInUser]=useState()
+
+    const userDbRef=db.collection('users')
+
+    const fetchUserData=async()=>{
+        const res=userDbRef.doc(currentUser.uid)
+        await res.onSnapshot((doc)=>{
+            setloggedInUser(doc.data())
+        })
+    }
+
+    useEffect(()=>{
+        if(currentUser){
+            fetchUserData()
+        }
+    },[])
+
+    console.log(loggedInUser);
 
     const handleLogout = async () => {
         try{
