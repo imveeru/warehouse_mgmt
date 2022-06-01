@@ -5,6 +5,7 @@ import {FiLogOut,FiMapPin,FiUser,FiCalendar,FiPhoneCall,FiShoppingCart} from "re
 import { useAuth } from "../../context/AuthContext"
 import {db} from '../../firebase'
 import { useNavigate} from "react-router-dom";
+import Loader from "react-js-loader";
 
 function Home() {
 
@@ -51,41 +52,41 @@ function Home() {
                     <img className="w-[70%] mx-auto my-auto" src={logo} alt="logo"></img>
                 </div>
 
-                <div className="grid grid-cols-1 grid-rows-6 row-span-6 p-4">
+                {loggedInUser?<div className="grid grid-cols-1 grid-rows-6 row-span-6 p-4">
                    
                     {/* Profile Image */}
                     <div className="row-span-2">
-                        <img className="w-[62%] mx-auto my-auto rounded-[1.75em] p-4" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="logo"></img>
+                        <img className="w-[62%] mx-auto my-auto rounded-[1.75em] p-4" src={loggedInUser.profileImg} alt="user"></img>
                     </div>
 
                     {/* User details */}
                     <div className="row-span-4 text-center mt-8 mb-6">
-                        <h2 className="font-title font-bold text-5xl">Ben's Bakery</h2>
+                        <h2 className="font-title font-bold text-5xl">{loggedInUser.name}</h2>
                         <div className="grid grid-cols-1 grid-rows-4 my-4">
                             <div className="flex flex-row place-items-center gap-3 bg-white p-3 m-3 rounded-xl shadow-md">
                                 <div className=" bg-yellow-100 p-2 rounded-md "><FiMapPin color="#baa00f"/> </div>
-                                <p className="font-body text-md text-slate-600">25, 1st street, RK Nagar, Chennai.</p>
+                                <p className="font-body text-md text-slate-600">{loggedInUser.address}</p>
                             </div>
 
                             <div className="flex flex-row place-items-center gap-3 bg-white p-3 m-3 rounded-xl shadow-md">
                                 <div className=" bg-green-100 p-2 rounded-md "><FiUser color="#3c995c"/> </div>
-                                <p className="font-body text-md text-slate-600">Restaurant</p>
+                                <p className="font-body text-md text-slate-600">{loggedInUser.type}</p>
                             </div>
 
                             <div className="flex flex-row place-items-center gap-3 bg-white p-3 m-3 rounded-xl shadow-md">
                                 <div className=" bg-violet-100 p-2 rounded-md "><FiCalendar color="#643c99"/> </div>
-                                <p className="font-body text-md text-slate-600">Since 2016</p>
+                                <p className="font-body text-md text-slate-600">Since {loggedInUser.userSince}</p>
                             </div>
 
                             <div className="flex flex-row place-items-center gap-3 bg-white p-3 m-3 rounded-xl shadow-md">
                                 <div className=" bg-red-100 p-2 rounded-md "><FiPhoneCall color="#99453c"/> </div>
-                                <p className="font-body text-md text-slate-600">Call us @ <a className=" font-medium hover:underline-offset-1" href="tel:123456789">1234567890</a></p>
+                                <p className="font-body text-md text-slate-600">Call us @ <a className=" font-medium hover:underline-offset-1" href="tel:123456789">{loggedInUser.contact}</a></p>
                             </div>
 
                             
                         </div>
                     </div>
-                </div>
+                </div>:<div><Loader type="bubble-ping" color={"#2563EB"} bgColor={"#2563EB"} title={"Loading..."} size={100} /></div>}
 
                 {/* Log out btn */}
                 <div className="row-span-2 p-4 place-self-center">
