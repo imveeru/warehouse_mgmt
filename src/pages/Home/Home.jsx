@@ -13,8 +13,10 @@ function Home() {
     console.log(currentUser.uid);
 
     const[loggedInUser,setloggedInUser]=useState()
+    const[productList,setProductList]=useState([])
 
     const userDbRef=db.collection('users')
+    const productDbRef=db.collection('products')
 
     const fetchUserData=async()=>{
         const res=userDbRef.doc(currentUser.uid)
@@ -23,13 +25,28 @@ function Home() {
         })
     }
 
+    const fetchProductData=async()=>{
+
+        const tempProductList=[]
+
+        const res=db.collection('products')
+        await res.onSnapshot((snapdoc)=>{
+            tempProductList.splice(0,tempProductList.length)
+            snapdoc.forEach((doc)=>{tempProductList.push(doc.data())})
+        })
+
+        console.log(tempProductList);
+    }
+
     useEffect(()=>{
         if(currentUser){
             fetchUserData()
         }
+        fetchProductData()
     },[])
 
-    console.log(loggedInUser);
+    console.log(loggedInUser)
+    console.log(productList);
 
     const handleLogout = async () => {
         try{
