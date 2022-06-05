@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { useForm } from "react-hook-form";
+import {db} from '../../firebase'
 
 function Profile({userID}) {
 
@@ -8,6 +9,9 @@ function Profile({userID}) {
     const onSubmit = (data) => {
         console.log(data);
         setUserData(data)
+        db.collection('users').doc(userID).set(data).
+        then(()=>{console.log("User added successfully")}).
+        catch((err)=>{console.log(err)})
     }
 
   return (
