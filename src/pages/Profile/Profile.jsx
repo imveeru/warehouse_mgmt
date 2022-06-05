@@ -66,6 +66,9 @@ function Profile({userID}) {
         </select>
 
         <input type="file" name="profileImg" form="sub-form"/>
+        <div className='outerbar'>
+          <div className='innerbar' style={{ width: `${progresspercent}%` }}>{progresspercent}%</div>
+        </div>
         <button type="submit" form="sub-form">Upload Image</button>
 
         <input {...register("userSince")} type="text" className="" hidden value={new Date().getFullYear()} form="main-form"/>
