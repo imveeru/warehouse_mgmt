@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react'
-import logo from '../../static/logo.png'
 import Product from '../../components/Product/Product'
 import {FiLogOut,FiMapPin,FiUser,FiCalendar,FiPhoneCall,FiShoppingCart} from "react-icons/fi"
 import { useAuth } from "../../context/AuthContext"
@@ -51,7 +50,7 @@ function Home() {
 
                 {/* App logo */}
                 <div className="row-span-2 p-4">
-                    <img className="w-[70%] mx-auto my-auto" src={logo} alt="logo"></img>
+                    <img className="w-[70%] mx-auto my-auto" src="https://firebasestorage.googleapis.com/v0/b/warehouse-ad245.appspot.com/o/logo.png?alt=media&token=a022033d-269e-4d23-97ff-829d595045b5" alt="logo"></img>
                 </div>
 
                 {loggedInUser?<div className="grid grid-cols-1 grid-rows-6 row-span-6 p-4">
