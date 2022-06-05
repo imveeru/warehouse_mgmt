@@ -12,7 +12,7 @@ function Home() {
 
     let navigate = useNavigate();
     const { currentUser, logout } = useAuth()
-    console.log(currentUser.uid);
+    // console.log(currentUser.uid);
 
     const[loggedInUser,setloggedInUser]=useState()
     const[productList,setProductList]=useState([])
@@ -43,10 +43,10 @@ function Home() {
             fetchUserData()
         }
         fetchProductData()
-    },[loggedInUser,productList])
+    },[productList,loggedInUser])
 
-    console.log(loggedInUser)
-    console.log(productList);
+    // console.log(loggedInUser)
+    // console.log(productList);
 
     const handleLogout = async () => {
         try{
@@ -124,7 +124,7 @@ function Home() {
                 <div className="flex flex-col gap-4 mt-6">
                     {
                         productList.map((product) =>{
-                            return <Product name={product.name} price={product.price} brand={product.brand} imgURL={product.imgUrl}/>
+                            return <Product key={product.name} name={product.name} price={product.price} brand={product.brand} imgURL={product.imgUrl}/>
                         })
                     }
                 </div>
