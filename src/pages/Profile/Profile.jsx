@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { useForm } from "react-hook-form";
-import {db} from '../../firebase'
+import {db,storage} from '../../firebase'
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate   } from "react-router-dom";
 
 function Profile({userID}) {
@@ -26,9 +27,29 @@ function Profile({userID}) {
 
     }
 
-    const handleImgUpload=(e)=>{
-
-    }
+    const handleImgUpload = (e) => {
+        e.preventDefault()
+        const file = e.target[0]?.files[0]
+        if (!file) return;
+        const storageRef = ref(storage, `files/profileImages/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+    
+        uploadTask.on("state_changed",
+          (snapshot) => {
+            const progress =
+              Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+            setProgresspercent(progress);
+          },
+          (error) => {
+            alert(error);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              setImgUrl(downloadURL)
+            });
+          }
+        );
+      }
 
   return (
     <div>
