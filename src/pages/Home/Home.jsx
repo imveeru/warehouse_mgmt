@@ -18,7 +18,6 @@ function Home() {
     const[productList,setProductList]=useState([])
 
     const userDbRef=db.collection('users')
-    const productDbRef=db.collection('products')
 
     const fetchUserData=async()=>{
         const res=userDbRef.doc(currentUser.uid)
@@ -44,7 +43,7 @@ function Home() {
             fetchUserData()
         }
         fetchProductData()
-    },[])
+    },[loggedInUser,productList])
 
     console.log(loggedInUser)
     console.log(productList);
