@@ -5,6 +5,7 @@ import Login from './pages/Login/Login'
 import Profile from './pages/Profile/Profile'
 import { AuthProvider } from "./context/AuthContext"
 import { Routes, Route } from "react-router-dom";
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route exact path="/register" element={<Register/>}/>
           <Route exact path="/login" element={<Login/>}/>
-          {/* <Route exact path="/profile" element={<Profile/>}/> */}
+          <Route exact path="/forgot-password" element={<ForgotPassword />}/>
         </Routes>
         {/* <Register/> */}
       </AuthProvider>
