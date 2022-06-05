@@ -1,16 +1,21 @@
 import React,{useState} from 'react'
 import {FiShoppingCart} from "react-icons/fi"
 
+let tempCart=[]
 function Product({name,price,brand,imgURL}) {
 
-    const[cart,setCart]=useState([])
+    const[cart,setCart]=useState()
 
-
-    const addToCart=(e)=>{
+    const addToCart=async (e)=>{
         e.preventDefault()
         const{quantity}=e.target.elements
-        console.log("elei add to cart",quantity.value);
+        const tempItem=quantity.value+"/"+name
+        // console.log("before",tempCart);
+        await tempCart.push(tempItem);
+        // console.log("after",tempCart);
+        setCart(tempCart)
     }
+
 
     return (
         <div className="flex gap-6 flex-row p-4 rounded-lg place-items-center bg-gray-bg/40">
@@ -33,6 +38,7 @@ function Product({name,price,brand,imgURL}) {
                 >
                 <FiShoppingCart/>Add to cart
             </button>
+            {cart}
         </div>
     )
 }
