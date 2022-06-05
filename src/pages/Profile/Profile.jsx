@@ -11,14 +11,14 @@ function Profile({userID}) {
     const { register, handleSubmit } = useForm();
     const[userData,setUserData]=useState()
 
-    const [imgUrl, setImgUrl] = useState("");
+    const [imgUrl, setImgUrl] = useState(); 
     const [progresspercent, setProgresspercent] = useState(0);
 
     const onSubmit = (data) => {
         console.log(data);
         setUserData(data)
 
-        db.collection('users').doc(userID).set(data).then(()=>{
+        db.collection('users').doc(userID).set({...data,"profileImg":imgUrl}).then(()=>{
             console.log("User added successfully")
             navigate("/login")
         }).catch((err)=>{
@@ -31,7 +31,7 @@ function Profile({userID}) {
         e.preventDefault()
         const file = e.target[0]?.files[0]
         if (!file) return;
-        const storageRef = ref(storage,'/profileImages/');
+        const storageRef = ref(storage,`/profileImages/${file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
     
         uploadTask.on("state_changed",
@@ -72,7 +72,7 @@ function Profile({userID}) {
         <button type="submit" form="sub-form">Upload Image</button>
 
         <input {...register("userSince")} type="text" className="" hidden value={new Date().getFullYear()} form="main-form"/>
-        <input {...register("profileImg")} type="text" className="" hidden value={imgUrl} form="main-form"/>
+        {/* <input {...register("profileImg")} type="text" className="" hidden value={imgUrl} form="main-form"/> */}
         <button type="submit" form="main-form">Submit</button>
 
         <p>Upload your profile image before submitting the form</p>
