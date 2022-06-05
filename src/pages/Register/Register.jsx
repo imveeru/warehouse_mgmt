@@ -48,7 +48,7 @@ function Register() {
       </form>
       <p>{error}</p>
     </div>
-    :<Profile/>}
+    :<Profile userID={uID}/>}
     </>
   )
 }
