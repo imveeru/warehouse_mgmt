@@ -18,12 +18,12 @@ function Profile({userID}) {
         console.log(data);
         setUserData(data)
 
-        // db.collection('users').doc(userID).set(data).then(()=>{
-        //     console.log("User added successfully")
-        //     navigate("/login")
-        // }).catch((err)=>{
-        //     console.log(err)
-        // })
+        db.collection('users').doc(userID).set(data).then(()=>{
+            console.log("User added successfully")
+            navigate("/login")
+        }).catch((err)=>{
+            console.log(err)
+        })
 
     }
 
@@ -74,6 +74,8 @@ function Profile({userID}) {
         <input {...register("userSince")} type="text" className="" hidden value={new Date().getFullYear()} form="main-form"/>
         <input {...register("profileImg")} type="text" className="" hidden value={imgUrl} form="main-form"/>
         <button type="submit" form="main-form">Submit</button>
+
+        <p>Upload your profile image before submitting the form</p>
         
     </div>
   )
