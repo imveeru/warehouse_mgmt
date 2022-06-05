@@ -43,7 +43,9 @@ function Home() {
 
 
     return (
+        
         <div className="h-100 p-5 grid grid-rows-1 grid-cols-12">
+            
             {/* User Information section */}
             <div className="static col-span-3 p-8 m-2 bg-gray-bg rounded-2xl grid grid-cols-1 grid-rows-10">
 

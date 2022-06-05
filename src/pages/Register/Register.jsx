@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { Route,useNavigate   } from "react-router-dom";
-import Home from '../Home/Home'
 import { useAuth } from "../../context/AuthContext"
+import Profile from '../Profile/Profile'
 
 
 function Register() {
@@ -10,8 +10,10 @@ function Register() {
 
   const { signup } = useAuth()
 
-  const[error,setError]=useState("")
+  const[error,setError]=useState()
   const[isLoading,setLoading]=useState(false)
+  const[uID,setUID]=useState("")
+  const[hasUID,setHasUID]=useState(false)
 
   const handleSubmit = async (e) => {
     
@@ -19,12 +21,14 @@ function Register() {
     const { email, password } = e.target.elements;
 
     try {
-      setError("")
       setLoading(true)
-      await signup(email.value, password.value)
-      return navigate("/login")
-    } catch (error) {
-      setError(error);
+      await signup(email.value, password.value).then((res)=>setUID(res.user.uid)).catch((err)=>console.log(err.message))
+      // return navigate("/profile")
+      setHasUID(true)
+      
+    } catch(err){
+      setError(err.message);
+      console.log(error);
     }
 
     setLoading(false)
@@ -32,7 +36,8 @@ function Register() {
   
 
   return (
-    <div>
+    <>
+    {!hasUID?<div>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
@@ -43,6 +48,8 @@ function Register() {
       </form>
       <p>{error}</p>
     </div>
+    :<Profile/>}
+    </>
   )
 }
 
