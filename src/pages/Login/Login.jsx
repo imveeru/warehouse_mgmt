@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Route,useNavigate   } from "react-router-dom";
+import { Link,useNavigate   } from "react-router-dom";
 import Home from '../Home/Home'
 import { useAuth } from "../../context/AuthContext"
 
@@ -41,6 +41,7 @@ function Login() {
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">Submit</button>
       </form>
+      <Link to="/forgot-password">Forgot Password?</Link>
       <p>{error}</p>
     </div>
   )
