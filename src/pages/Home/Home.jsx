@@ -5,6 +5,8 @@ import { useAuth } from "../../context/AuthContext"
 import {db} from '../../firebase'
 import { useNavigate} from "react-router-dom";
 import Loader from "react-js-loader";
+import { collection, getDocs } from "firebase/firestore";
+
 
 function Home() {
 
@@ -29,13 +31,12 @@ function Home() {
 
         const tempProductList=[]
 
-        const res=db.collection('products')
-        await res.onSnapshot((snapdoc)=>{
-            tempProductList.splice(0,tempProductList.length)
-            snapdoc.forEach((doc)=>{tempProductList.push(doc.data())})
-        })
+        const querySnapshot = await getDocs(collection(db, "products"));
+        querySnapshot.forEach((doc) => {
+            tempProductList.push(doc.data())
+        });
 
-        console.log(tempProductList);
+        setProductList(tempProductList)
     }
 
     useEffect(()=>{
