@@ -1,8 +1,11 @@
 import React,{useState} from 'react'
 import { useForm } from "react-hook-form";
 import {db} from '../../firebase'
+import { useNavigate   } from "react-router-dom";
 
 function Profile({userID}) {
+
+    let navigate=useNavigate()
 
     const { register, handleSubmit } = useForm();
     const[userData,setUserData]=useState()
@@ -12,6 +15,8 @@ function Profile({userID}) {
         db.collection('users').doc(userID).set(data).
         then(()=>{console.log("User added successfully")}).
         catch((err)=>{console.log(err)})
+
+        navigate("/login")
     }
 
   return (
@@ -28,7 +33,6 @@ function Profile({userID}) {
             <input {...register("userSince")} type="text" className="" hidden value={new Date().getFullYear()}/>
             <button type="submit">Submit</button>
         </form>
-        <p>{userData}</p>
     </div>
   )
 }
