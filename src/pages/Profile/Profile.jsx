@@ -1,10 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useForm } from "react-hook-form";
 
 function Profile({userID}) {
 
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const[userData,setUserData]=useState()
+    const onSubmit = data => setUserData(data);
 
   return (
     <div>
@@ -19,7 +20,7 @@ function Profile({userID}) {
             </select>
             <input {...register("userSince")} type="text" className="" hidden value={new Date().getFullYear()}/>
         </form>
-        <p>{}</p>
+        <p>{userData}</p>
     </div>
   )
 }
