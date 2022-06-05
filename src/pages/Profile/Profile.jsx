@@ -9,16 +9,20 @@ function Profile({userID}) {
 
     const { register, handleSubmit } = useForm();
     const[userData,setUserData]=useState()
+
+    const [imgUrl, setImgUrl] = useState(null);
+    const [progresspercent, setProgresspercent] = useState(0);
+
     const onSubmit = (data) => {
         console.log(data);
         setUserData(data)
 
-        db.collection('users').doc(userID).set(data).then(()=>{
-            console.log("User added successfully")
-            navigate("/login")
-        }).catch((err)=>{
-            console.log(err)
-        })
+        // db.collection('users').doc(userID).set(data).then(()=>{
+        //     console.log("User added successfully")
+        //     navigate("/login")
+        // }).catch((err)=>{
+        //     console.log(err)
+        // })
 
     }
 
@@ -33,6 +37,7 @@ function Profile({userID}) {
                 <option value="Restaurant"></option>
                 <option value="Grocery Store"></option>
             </select>
+            <input {...register("profileImg")} type="file" name="profileImg" />
             <input {...register("userSince")} type="text" className="" hidden value={new Date().getFullYear()}/>
             <button type="submit">Submit</button>
         </form>
