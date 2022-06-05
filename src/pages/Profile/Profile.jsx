@@ -13,9 +13,13 @@ function Profile({userID}) {
         console.log(data);
         setUserData(data)
 
-        db.collection('users').doc(userID).set(data).then(()=>{console.log("User added successfully")}).catch((err)=>{console.log(err)})
+        db.collection('users').doc(userID).set(data).then(()=>{
+            console.log("User added successfully")
+            navigate("/login")
+        }).catch((err)=>{
+            console.log(err)
+        })
 
-        navigate("/login")
     }
 
   return (
