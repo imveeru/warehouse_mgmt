@@ -123,10 +123,11 @@ function Home() {
             <div className="col-span-6 p-8 m-2 overflow-scroll">
                 <p className="text-left font-title font-bold text-5xl ">Products</p>
                 <div className="flex flex-col gap-4 mt-6">
-                    <Product/>
-                    <Product/>
-                    <Product/>
-                    <Product/>
+                    {
+                        productList.map((product) =>{
+                            return <Product name={product.name} price={product.price} brand={product.brand} imgURL={product.imgUrl}/>
+                        })
+                    }
                 </div>
             </div>
 
