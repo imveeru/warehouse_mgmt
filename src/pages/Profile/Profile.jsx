@@ -11,7 +11,7 @@ function Profile({userID}) {
     const { register, handleSubmit } = useForm();
     const[userData,setUserData]=useState()
 
-    const [imgUrl, setImgUrl] = useState(null);
+    const [imgUrl, setImgUrl] = useState("");
     const [progresspercent, setProgresspercent] = useState(0);
 
     const onSubmit = (data) => {
@@ -31,7 +31,7 @@ function Profile({userID}) {
         e.preventDefault()
         const file = e.target[0]?.files[0]
         if (!file) return;
-        const storageRef = ref(storage, `files/profileImages/${file.name}`);
+        const storageRef = ref(storage,'/profileImages/');
         const uploadTask = uploadBytesResumable(storageRef, file);
     
         uploadTask.on("state_changed",
@@ -72,6 +72,7 @@ function Profile({userID}) {
         <button type="submit" form="sub-form">Upload Image</button>
 
         <input {...register("userSince")} type="text" className="" hidden value={new Date().getFullYear()} form="main-form"/>
+        <input {...register("profileImg")} type="text" className="" hidden value={imgUrl} form="main-form"/>
         <button type="submit" form="main-form">Submit</button>
         
     </div>
