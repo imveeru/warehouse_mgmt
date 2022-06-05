@@ -45,7 +45,7 @@ function Profile({userID}) {
         </select>
 
         <input type="file" name="profileImg" form="sub-form"/>
-        <button type="submit" form="sub-form">Submit</button>
+        <button type="submit" form="sub-form">Upload Image</button>
 
         <input {...register("userSince")} type="text" className="" hidden value={new Date().getFullYear()} form="main-form"/>
         <button type="submit" form="main-form">Submit</button>
