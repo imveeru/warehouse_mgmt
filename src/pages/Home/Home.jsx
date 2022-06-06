@@ -16,6 +16,12 @@ function Home() {
     // console.log(currentUser.uid);
 
     const {shoppingList}=useContext(CartContext)
+    //  console.log(shoppingList);
+    const shoppingMarkup = shoppingList.map((item, index) => (
+        <li key = {index} className = 'list-item'> 
+                  {item} 
+       </li>
+    )) 
 
 
     const[loggedInUser,setloggedInUser]=useState()
@@ -47,6 +53,7 @@ function Home() {
             fetchUserData()
         }
         fetchProductData()
+        
     },[productList,loggedInUser])
 
     // console.log(loggedInUser)
@@ -134,6 +141,7 @@ function Home() {
                         })
                     }
                 </div>
+                {shoppingList.map((item) =>{return <p>{item}</p>})}
             </div>
 
             {/* Cart */}
@@ -144,8 +152,9 @@ function Home() {
                 </div>
 
                 <div className="flex flex-col row-span-4 text-center mt-8 mb-6 place-self-center text-8xl text-black/40">
-                    <FiShoppingCart className="ml-8"/>
-                    <p className="text-4xl font-body mt-4 place-items-center ">Add items <br></br>to your cart!</p>
+                    {/* <FiShoppingCart className="ml-8"/>
+                    <p className="text-4xl font-body mt-4 place-items-center ">Add items <br></br>to your cart!</p> */}
+                    <ul>{shoppingMarkup}</ul>
                 </div>
 
                 <div className="row-span-2 p-4 place-self-center">
