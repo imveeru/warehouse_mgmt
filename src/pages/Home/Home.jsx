@@ -6,6 +6,7 @@ import {db} from '../../firebase'
 import { useNavigate} from "react-router-dom";
 import Loader from "react-js-loader";
 import { collection, getDocs } from "firebase/firestore";
+import {CartProvider} from "../../context/cartContext"
 
 
 function Home() {
@@ -61,6 +62,8 @@ function Home() {
     return (
         
         <div className="h-100 p-5 grid grid-rows-1 grid-cols-12">
+
+            <CartProvider>
             
             {/* User Information section */}
             <div className="static col-span-3 p-8 m-2 bg-gray-bg rounded-2xl grid grid-cols-1 grid-rows-10">
@@ -151,6 +154,8 @@ function Home() {
                     </button>
                 </div>
             </div>
+
+            </CartProvider>
             
         </div>
     )
