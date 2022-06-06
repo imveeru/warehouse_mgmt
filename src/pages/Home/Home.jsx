@@ -16,7 +16,7 @@ function Home() {
     // console.log(currentUser.uid);
 
     const { shoppingList }=useContext(CartContext)
-    console.log(shoppingList)
+    // console.log(shoppingList)
     // const shoppingMarkup = shoppingList.map((item, index) => (
     //     <li key = {index} className = 'list-item'> 
     //               {item} 
