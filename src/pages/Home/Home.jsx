@@ -154,7 +154,7 @@ function Home() {
                     {shoppingList.length<=0?<>
                     <FiShoppingCart className="ml-8"/>
                     <p className="text-4xl font-body mt-4 place-items-center ">Add items <br></br>to your cart!</p>
-                    </>:<p>Irukku.. cart la item iruku</p>}
+                    </>:<p>Items added.</p>}
                 </div>
 
                 <div className="row-span-2 p-4 place-self-center">
