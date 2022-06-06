@@ -16,13 +16,12 @@ function Home() {
     // console.log(currentUser.uid);
 
     const { shoppingList }=useContext(CartContext)
-    const[cart,setCart]=useState(shoppingList)
     // console.log(shoppingList)
-    // const shoppingMarkup = shoppingList.map((item, index) => (
-    //     <li key = {index} className = 'list-item'> 
-    //               {item} 
-    //    </li>
-    // )) 
+    const shoppingMarkup = shoppingList.map((item, index) => (
+        <li key = {index} className = 'list-item'> 
+                  {item} 
+       </li>
+    )) 
 
 
     const[loggedInUser,setloggedInUser]=useState()
@@ -153,7 +152,7 @@ function Home() {
                     {shoppingList.length<=0?<>
                     <FiShoppingCart className="ml-8"/>
                     <p className="text-4xl font-body mt-4 place-items-center ">Add items <br></br>to your cart!</p>
-                    </>:<p>Items added.</p>}
+                    </>:<ul>{shoppingMarkup}</ul>}
                 </div>
 
                 <div className="row-span-2 p-4 place-self-center">
