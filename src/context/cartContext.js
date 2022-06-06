@@ -10,8 +10,6 @@ export const CartContext = createContext(initialState);
 export const CartProvider = ({ children }) => {
    const [state, dispatch] = useReducer(AppReducer, initialState);
 
-   // Actions for changing state
-
    function addItemToList(item) {
        dispatch({
            type: 'ADD_ITEM',
