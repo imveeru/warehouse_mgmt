@@ -38,7 +38,6 @@ function Product({name,price,brand,imgURL}) {
                 >
                 <FiShoppingCart/>Add to cart
             </button>
-            {cart}
         </div>
     )
 }
