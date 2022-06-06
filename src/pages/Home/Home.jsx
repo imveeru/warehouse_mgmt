@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import Product from '../../components/Product/Product'
 import {FiLogOut,FiMapPin,FiUser,FiCalendar,FiPhoneCall,FiShoppingCart} from "react-icons/fi"
 import { useAuth } from "../../context/AuthContext"
@@ -6,7 +6,7 @@ import {db} from '../../firebase'
 import { useNavigate} from "react-router-dom";
 import Loader from "react-js-loader";
 import { collection, getDocs } from "firebase/firestore";
-import {CartProvider} from "../../context/cartContext"
+import {CartProvider,CartContext} from "../../context/cartContext"
 
 
 function Home() {
@@ -14,6 +14,9 @@ function Home() {
     let navigate = useNavigate();
     const { currentUser, logout } = useAuth()
     // console.log(currentUser.uid);
+
+    const {shoppingList}=useContext(CartContext)
+
 
     const[loggedInUser,setloggedInUser]=useState()
     const[productList,setProductList]=useState([])

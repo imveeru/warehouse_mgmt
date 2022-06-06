@@ -1,19 +1,17 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import {FiShoppingCart} from "react-icons/fi"
+import { CartContext } from './../../context/cartContext';
 
-let tempCart=[]
 function Product({name,price,brand,imgURL}) {
 
-    const[cart,setCart]=useState()
 
-    const addToCart=async (e)=>{
+    const { addItemToList } = useContext(CartContext);
+
+    const addToCart=(e)=>{
         e.preventDefault()
         const{quantity}=e.target.elements
         const tempItem=quantity.value+"/"+name
-        // console.log("before",tempCart);
-        await tempCart.push(tempItem);
-        // console.log("after",tempCart);
-        setCart(tempCart)
+        addItemToList(tempItem)
     }
 
 
