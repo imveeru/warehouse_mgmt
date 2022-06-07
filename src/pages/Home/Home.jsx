@@ -42,7 +42,7 @@ function Home() {
     const[loggedInUser,setloggedInUser]=useState()
     const[productList,setProductList]=useState([])
 
-    const placeOrder=()=>{
+    const placeOrder=async()=>{
 
         setCart(tempCart)
         const order={
@@ -54,8 +54,8 @@ function Home() {
             "products":tempCart,
         }
 
-        db.collection('orders').doc().set(order).then(()=>{
-            console.log("Order placed!")
+        db.collection('orders').add(order).then((docRef)=>{
+            console.log("Order placed!",docRef.id)
         }).catch((err)=>{
             console.log(err)
         })
