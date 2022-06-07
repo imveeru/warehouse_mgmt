@@ -8,6 +8,8 @@ import Loader from "react-js-loader";
 import { collection, getDocs } from "firebase/firestore";
 import {CartContext} from "./../../context/cartContext"
 
+let tempCart=[]
+
 function Home() {
 
     let navigate = useNavigate();
@@ -15,7 +17,19 @@ function Home() {
     // console.log(currentUser.uid);
 
     const { shoppingList }=useContext(CartContext)
-    // console.log(shoppingList)
+    const cartCount = shoppingList.reduce((acc, curr) => (acc[curr] = (acc[curr] || 0) + 1, acc), {})
+    let cartKeys=Object.keys(cartCount)
+    
+    
+    let i
+    for(i=0;i<cartKeys.length;i++){
+        tempCart.push(cartKeys[i]+"/"+cartCount[cartKeys[i]])
+    }
+    
+    let x=Math.ceil(cartKeys.length/2)
+
+    console.log(tempCart);
+
     const shoppingMarkup = shoppingList.map((item, index) => (
         <li key = {index} className = 'list-item'> 
                   {item} 
@@ -61,7 +75,6 @@ function Home() {
             fetchUserData()
         }
         fetchProductData()
-        
     },[])
 
     // console.log(loggedInUser)
