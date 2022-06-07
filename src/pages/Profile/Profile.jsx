@@ -71,11 +71,11 @@ function Profile({userID}) {
         <div className='outerbar'>
           <div className='innerbar' style={{ width: `${progresspercent}%` }}>{progresspercent}%</div>
         </div>
-        <button type="submit" form="sub-form">Upload Image</button>
+        <button type="submit" form="sub-form">Upload Image</button><br/>
 
         <input {...register("userSince")} type="text" className="" hidden value={new Date().getFullYear()} form="main-form"/>
         {/* <input {...register("profileImg")} type="text" className="" hidden value={imgUrl} form="main-form"/> */}
-        <button type="submit" form="main-form">Submit</button>
+        <button type="submit" form="main-form">Save Profile</button><br/>
 
         <p>Upload your profile image before submitting the form</p>
         
