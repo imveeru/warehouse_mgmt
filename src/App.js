@@ -19,7 +19,7 @@ function App() {
             <Route exact path="/register" element={<Register/>}/>
             <Route exact path="/login" element={<Login/>}/>
             <Route exact path="/forgot-password" element={<ForgotPassword />}/>
-            <Route exact path="/Checkout" element={<Checkout />}/>
+            <Route exact path="/checkout/:id" element={<Checkout />}/>
           </Routes>
         </CartProvider>
       </AuthProvider>

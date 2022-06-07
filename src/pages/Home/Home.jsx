@@ -56,11 +56,12 @@ function Home() {
 
         db.collection('orders').add(order).then((docRef)=>{
             console.log("Order placed!",docRef.id)
+            navigate(`/checkout/${docRef.id}`)
         }).catch((err)=>{
             console.log(err)
         })
 
-        navigate("/checkout")
+        
     }
 
     const userDbRef=db.collection('users')
