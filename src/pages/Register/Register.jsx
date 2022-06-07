@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { Route,useNavigate   } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext"
 import Profile from '../Profile/Profile'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 function Register() {
@@ -23,6 +24,7 @@ function Register() {
     try {
       setLoading(true)
       await signup(email.value, password.value).then((res)=>setUID(res.user.uid)).catch((err)=>console.log(err.message))
+      toast.success("User registered Successfully!")
       // return navigate("/profile")
       setHasUID(true)
       
@@ -38,6 +40,7 @@ function Register() {
   return (
     <>
     {!hasUID?<div>
+      <Toaster/>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>

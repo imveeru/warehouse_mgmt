@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import {db,storage} from '../../firebase'
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useNavigate   } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 function Profile({userID}) {
 
@@ -19,7 +20,7 @@ function Profile({userID}) {
         setUserData(data)
 
         db.collection('users').doc(userID).set({...data,"profileImg":imgUrl}).then(()=>{
-            console.log("User added successfully")
+            toast.success("User added successfully")
             navigate("/login")
         }).catch((err)=>{
             console.log(err)
@@ -53,6 +54,7 @@ function Profile({userID}) {
 
   return (
     <div>
+      <Toaster/>
         <form id="main-form" onSubmit={handleSubmit(onSubmit)}></form>
         <form id="sub-form" onSubmit={handleImgUpload}></form>
 
