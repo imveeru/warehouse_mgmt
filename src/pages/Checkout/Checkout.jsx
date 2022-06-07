@@ -9,17 +9,17 @@ function Checkout() {
 
 
   const { shoppingList }=useContext(CartContext)
-  const billRef=db.collection("orders")
-  // const pay=()=>{
-
-  // }
+  const billRef=db.collection("orders").doc(id)
+  const pay=()=>{
+    billRef.update({hasPaid:true}).then(()=>{console.log("Bill Payed")}).catch((err)=>{console.log(err)})
+  }
 
   return (
     <div>
       Checkout
       {shoppingList.toString()}
       <p>{id}</p>
-      <br/><button onClick={""}>Pay</button>
+      <br/><button onClick={pay}>Pay</button>
     </div>
   )
 }
