@@ -3,12 +3,10 @@ import Product from '../../components/Product/Product'
 import {FiLogOut,FiMapPin,FiUser,FiCalendar,FiPhoneCall,FiShoppingCart} from "react-icons/fi"
 import { useAuth } from "../../context/AuthContext"
 import {db} from '../../firebase'
-import { Link,useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Loader from "react-js-loader";
 import { collection, getDocs } from "firebase/firestore";
 import {CartContext} from "./../../context/cartContext"
-import Checkout from '../Checkout/Checkout';
-
 
 function Home() {
 
@@ -27,6 +25,15 @@ function Home() {
 
     const[loggedInUser,setloggedInUser]=useState()
     const[productList,setProductList]=useState([])
+
+    const placeOrder=()=>{
+        db.collection('orders').doc().set({}).then(()=>{
+            console.log("User added successfully")
+            navigate("/login")
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
 
     const userDbRef=db.collection('users')
 
@@ -55,7 +62,7 @@ function Home() {
         }
         fetchProductData()
         
-    },[productList,loggedInUser])
+    },[])
 
     // console.log(loggedInUser)
     // console.log(productList);
@@ -159,8 +166,9 @@ function Home() {
                 <div className="row-span-2 p-4 place-self-center">
                     <button
                         className="flex flex-row place-items-center gap-2 px-6 py-2 text-white font-title font-semibold text-xl bg-green-600 hover:bg-green-700 rounded-lg"
+                        onClick={placeOrder}
                     >
-                        <FiShoppingCart></FiShoppingCart><Link to="/checkout"> Buy Now</Link>
+                        <FiShoppingCart></FiShoppingCart>Buy Now
                     </button>
                 </div>
             </div>
