@@ -2,7 +2,7 @@ import React,{useState,useContext} from 'react'
 import {FiShoppingCart} from "react-icons/fi"
 import { CartContext } from './../../context/cartContext';
 
-function Product({name,price,brand,imgURL}) {
+function Product({name,price,brand,imgURL,location}) {
 
 
     const { addItemToList } = useContext(CartContext);
@@ -10,7 +10,7 @@ function Product({name,price,brand,imgURL}) {
     const addToCart=(e)=>{
         e.preventDefault()
         const{quantity}=e.target.elements
-        const tempItem=quantity.value+"/"+name
+        const tempItem=quantity.value+"/"+location
         addItemToList(tempItem)
     }
 

@@ -27,12 +27,12 @@ function Home() {
     const[productList,setProductList]=useState([])
 
     const placeOrder=()=>{
-        db.collection('orders').doc().set({}).then(()=>{
-            console.log("User added successfully")
-            navigate("/login")
-        }).catch((err)=>{
-            console.log(err)
-        })
+        // db.collection('orders').doc().set({}).then(()=>{
+            
+        // }).catch((err)=>{
+        //     console.log(err)
+        // })
+        navigate("/checkout")
     }
 
     const userDbRef=db.collection('users')
@@ -143,7 +143,7 @@ function Home() {
                 <div className="flex flex-col gap-4 mt-6">
                     {
                         productList.map((product) =>{
-                            return <Product key={product.name} name={product.name} price={product.price} brand={product.brand} imgURL={product.imgUrl}/>
+                            return <Product key={product.name} name={product.name} price={product.price} brand={product.brand} imgURL={product.imgUrl} location={product.location}/>
                         })
                     }
                 </div>
