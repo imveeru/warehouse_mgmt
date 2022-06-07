@@ -8,7 +8,6 @@ import Loader from "react-js-loader";
 import { collection, getDocs } from "firebase/firestore";
 import {CartContext} from "./../../context/cartContext"
 
-let tempCart=[]
 
 function Home() {
 
@@ -22,13 +21,16 @@ function Home() {
     
     
     let i
+    let tempCart=[]
     for(i=0;i<cartKeys.length;i++){
+        // console.log("before",tempCart)
+        tempCart.splice()
         tempCart.push(cartKeys[i]+"/"+cartCount[cartKeys[i]])
+        // console.log("after",tempCart)
     }
-    
-    let x=Math.ceil(cartKeys.length/2)
 
-    console.log(tempCart);
+    const[cart,setCart]=useState()
+    
 
     const shoppingMarkup = shoppingList.map((item, index) => (
         <li key = {index} className = 'list-item'> 
@@ -41,11 +43,23 @@ function Home() {
     const[productList,setProductList]=useState([])
 
     const placeOrder=()=>{
-        // db.collection('orders').doc().set({}).then(()=>{
-            
-        // }).catch((err)=>{
-        //     console.log(err)
-        // })
+
+        setCart(tempCart)
+        const order={
+            "hasDelivered":false,
+            "hasPaid":false,
+            "orderedBy":currentUser.uid,
+            "orderTime":new Date().toUTCString(),
+            "amount":100,
+            "products":tempCart,
+        }
+
+        db.collection('orders').doc().set(order).then(()=>{
+            console.log("Order placed!")
+        }).catch((err)=>{
+            console.log(err)
+        })
+
         navigate("/checkout")
     }
 
