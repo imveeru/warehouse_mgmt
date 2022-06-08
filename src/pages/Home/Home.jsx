@@ -57,7 +57,7 @@ function Home() {
         db.collection('orders').add(order).then((docRef)=>{
             console.log("Order placed!",docRef.id)
             const db = getDatabase();
-            set(ref(db, 'billID'), {billID: docRef.id});
+            set(ref(db, 'billID'), {billID: docRef.id,order:tempCart});
             navigate(`/checkout/${docRef.id}`)
         }).catch((err)=>{
             console.log(err)
