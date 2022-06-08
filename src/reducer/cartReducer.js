@@ -10,6 +10,10 @@ const cartReducer= (state, action) => {
            return {
                shoppingList: state.shoppingList.filter(item => item !== action.payload)
            }
+       case 'CLEAR_CART':
+            return {
+                shoppingList: []
+            }
        default:
            return state;
    }

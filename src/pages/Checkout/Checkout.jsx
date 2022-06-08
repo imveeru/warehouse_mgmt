@@ -14,14 +14,18 @@ function Checkout() {
   let navigate=useNavigate()
 
 
-  const { shoppingList }=useContext(CartContext)
+  const { shoppingList,clearCart }=useContext(CartContext)
   const billRef=db.collection("orders").doc(id)
   
   const pay=()=>{
     billRef.update({hasPaid:true}).then(()=>{
       console.log("Bill Payed")
       toast("Bill Payed!",{icon:"🥳💵"})
-      setTimeout(() => { navigate("/") }, 2500);
+      setTimeout(() => { 
+        navigate("/")
+        clearCart()
+
+      }, 2500);
     }).catch((err)=>{
       console.log(err)
     })

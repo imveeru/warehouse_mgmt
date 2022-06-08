@@ -23,8 +23,14 @@ export const CartProvider = ({ children }) => {
        });
    }
 
+   function clearCart(){
+       dispatch({
+           type:'CLEAR_CART'
+       });
+   }
+
    return(
-      <CartContext.Provider value = {{shoppingList : state.shoppingList, addItemToList, removeItemFromList}}> 
+      <CartContext.Provider value = {{shoppingList : state.shoppingList, addItemToList, removeItemFromList,clearCart}}> 
         {children} 
       </CartContext.Provider>
    )
