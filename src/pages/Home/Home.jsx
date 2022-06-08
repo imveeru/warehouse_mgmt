@@ -2,13 +2,12 @@ import React,{useState,useEffect,useContext} from 'react'
 import Product from '../../components/Product/Product'
 import {FiLogOut,FiMapPin,FiUser,FiCalendar,FiPhoneCall,FiShoppingCart} from "react-icons/fi"
 import { useAuth } from "../../context/AuthContext"
-import {db} from '../../firebase'
+import {db,rDB} from '../../firebase'
 import {useNavigate} from "react-router-dom";
 import Loader from "react-js-loader";
 import { collection, getDocs } from "firebase/firestore";
 import {CartContext} from "./../../context/cartContext"
-
-
+import { getDatabase, ref, set } from "firebase/database";
 
 function Home() {
 
@@ -57,6 +56,8 @@ function Home() {
 
         db.collection('orders').add(order).then((docRef)=>{
             console.log("Order placed!",docRef.id)
+            const db = getDatabase();
+            set(ref(db, 'billID'), {billID: docRef.id});
             navigate(`/checkout/${docRef.id}`)
         }).catch((err)=>{
             console.log(err)
@@ -85,6 +86,7 @@ function Home() {
 
         setProductList(tempProductList)
     }
+
 
     useEffect(()=>{
         if(currentUser){

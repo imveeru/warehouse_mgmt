@@ -1,9 +1,11 @@
-import React,{useContext} from 'react'
-import { Route,useNavigate   } from "react-router-dom";
+import React,{useContext,useEffect} from 'react'
+import { useNavigate   } from "react-router-dom";
 import {CartContext} from "./../../context/cartContext"
-import {db} from '../../firebase'
+import {db,rDB} from '../../firebase'
 import {useParams } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast';
+import { getDatabase, ref, onValue} from "firebase/database";
+
 
 function Checkout() {
 
@@ -24,6 +26,21 @@ function Checkout() {
       console.log(err)
     })
   }
+
+  const DB = getDatabase();
+  const billIDRef = ref(DB, 'billID');
+
+  const fetchBillID=() => {
+
+    onValue(billIDRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+});
+  }
+
+  useEffect(() => {
+    fetchBillID()
+  },[])
 
   return (
     <div>
