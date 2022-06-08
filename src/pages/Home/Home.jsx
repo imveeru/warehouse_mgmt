@@ -9,6 +9,7 @@ import { collection, getDocs } from "firebase/firestore";
 import {CartContext} from "./../../context/cartContext"
 
 
+
 function Home() {
 
     let navigate = useNavigate();

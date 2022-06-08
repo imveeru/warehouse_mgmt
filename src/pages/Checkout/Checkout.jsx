@@ -29,8 +29,8 @@ function Checkout() {
     <div>
       <Toaster/>
       Checkout
-      <br></br><strong>Bill ID: </strong>{shoppingList.toString()}
-      <p>{id}</p>
+      <br></br>{shoppingList.toString()}
+      <p><strong>Bill ID: </strong>{id}</p>
       <br/><button onClick={pay}>Pay</button>
     </div>
   )
