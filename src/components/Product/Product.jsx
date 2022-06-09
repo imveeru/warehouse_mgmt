@@ -1,23 +1,27 @@
 import React,{useContext} from 'react'
 import {FiShoppingCart} from "react-icons/fi"
 import { CartContext } from './../../context/cartContext';
+import {OrderContext} from "./../../context/orderContext"
 
 function Product({name,price,brand,imgURL,location}) {
 
 
     const { addItemToList } = useContext(CartContext);
 
-    const addToCart=(e)=>{
+    const { addToCart }=useContext(OrderContext)
+
+    const addItemToCart=(e)=>{
         e.preventDefault()
         const{quantity}=e.target.elements
         const tempItem=quantity.value+"/"+location
         addItemToList(tempItem)
+        addToCart(location)
     }
 
 
     return (
         <div className="flex gap-6 flex-row p-4 rounded-lg place-items-center bg-gray-bg/40">
-            <form id={"addToCart"+name} onSubmit={addToCart}></form>
+            <form id={"addToCart"+name} onSubmit={addItemToCart}></form>
             <img className="rounded-lg w-[70px]" alt="product" src={imgURL}></img>
             <div className="flex flex-col">
                 <p className="font-body text-3xl  font-semibold">{name}</p>

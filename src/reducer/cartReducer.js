@@ -14,6 +14,10 @@ const cartReducer= (state, action) => {
             return {
                 shoppingList: []
             }
+       case 'ADD_TO_CART':
+           return {
+                   shoppingCart: [action.payload, ...state.shoppingCart]
+           }
        default:
            return state;
    }

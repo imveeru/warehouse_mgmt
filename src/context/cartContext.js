@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from 'react';
 import cartReducer from '../reducer/cartReducer';
 
 const initialState = {
-   shoppingList : []
+   shoppingList : [],
 }
 
 export const CartContext = createContext(initialState);
@@ -30,7 +30,7 @@ export const CartProvider = ({ children }) => {
    }
 
    return(
-      <CartContext.Provider value = {{shoppingList : state.shoppingList, addItemToList, removeItemFromList,clearCart}}> 
+      <CartContext.Provider value = {{shoppingList : state.shoppingList,addItemToList, removeItemFromList,clearCart}}> 
         {children} 
       </CartContext.Provider>
    )

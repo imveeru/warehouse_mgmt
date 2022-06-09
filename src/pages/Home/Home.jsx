@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import Loader from "react-js-loader";
 import { collection, getDocs } from "firebase/firestore";
 import {CartContext} from "./../../context/cartContext"
+import {OrderContext} from "./../../context/orderContext"
 import { getDatabase, ref, set } from "firebase/database";
 
 function Home() {
@@ -20,6 +21,9 @@ function Home() {
     let cartKeys=Object.keys(cartCount)
     
     
+    const { shoppingCart,emptyCart }=useContext(OrderContext)
+
+
     let i
     let tempCart=[]
     for(i=0;i<cartKeys.length;i++){
@@ -57,7 +61,12 @@ function Home() {
         db.collection('orders').add(order).then((docRef)=>{
             console.log("Order placed!",docRef.id)
             const db = getDatabase();
-            set(ref(db, 'billID'), {billID: docRef.id,order:tempCart});
+            // set(ref(db, 'billID'), {billID: docRef.id,order:tempCart});
+
+            shoppingCart.sort((a, b)=>{return a - b})
+            set(ref(db, 'billID'), {orderID:docRef.id,locations:shoppingCart})
+            emptyCart()
+
             navigate(`/checkout/${docRef.id}`)
         }).catch((err)=>{
             console.log(err)

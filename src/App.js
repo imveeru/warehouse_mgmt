@@ -5,6 +5,7 @@ import Login from './pages/Login/Login'
 import { AuthProvider } from "./context/AuthContext"
 import { Routes, Route } from "react-router-dom";
 import {CartProvider} from "./context/cartContext"
+import {OrderProvider} from "./context/orderContext"
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import Checkout from './pages/Checkout/Checkout';
 
@@ -13,6 +14,7 @@ function App() {
   return (
     <div className="App">
       <AuthProvider>
+        <OrderProvider>
         <CartProvider>
           <Routes>
             <Route path="/" element={<Home/>}/>
@@ -22,6 +24,7 @@ function App() {
             <Route exact path="/checkout/:id" element={<Checkout />}/>
           </Routes>
         </CartProvider>
+        </OrderProvider>
       </AuthProvider>
     </div>
   );
